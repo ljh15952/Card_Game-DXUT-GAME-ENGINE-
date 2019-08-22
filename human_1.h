@@ -10,6 +10,7 @@ public:
 	void Ability() override;
 	void PlayCardEvent() override;
 	void DeathCardEvent() override;
-	void Update() override;
+
+	void DeleteCard() override;
 };
 

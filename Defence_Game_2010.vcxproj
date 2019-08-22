@@ -384,25 +384,27 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BingleBingle.cpp" />
     <ClCompile Include="card.cpp" />
+    <ClCompile Include="CardMaster.cpp" />
     <ClCompile Include="Director.cpp" />
     <ClCompile Include="human_1.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Types.cpp" />
-    <ClInclude Include="BingleBingle.h" />
     <ClInclude Include="card.h" />
+    <ClInclude Include="CardMaster.h" />
     <ClInclude Include="cards.h" />
     <ClInclude Include="Director.h" />
     <ClInclude Include="human_1.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />

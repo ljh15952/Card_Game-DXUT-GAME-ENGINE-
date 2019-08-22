@@ -20,5 +20,8 @@ public:
 	virtual void Attack() {};
 	virtual void PlayCardEvent() {};
 	virtual void DeathCardEvent() {};
+	void Update() override;
+	virtual void DeleteCard() {};
+
 };
 

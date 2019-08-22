@@ -45,20 +45,11 @@ void Human_1::DeathCardEvent() //if (card->Deathrattle == battlecrt)
 	cout << "HE HAS NO DEATH RATTLE" << endl;
 }
 
-void Human_1::Update()
+void Human_1::DeleteCard()
 {
-	
-
-	if (_scale.x >= 1.2f)
-	{
-		_HpLabel->_position = { this->_position.x - 60,this->_position.y + 75 };
-		_CostLabel->_position = { this->_position.x - 62,this->_position.y - 107 };
-		_AtkpowerLabel->_position = { this->_position.x + 55,this->_position.y + 75 };
-	}
-	else
-	{
-		_HpLabel->_position = { this->_position.x - 50,this->_position.y + 65 };
-		_CostLabel->_position = { this->_position.x - 52,this->_position.y - 87 };
-		_AtkpowerLabel->_position = { this->_position.x + 45,this->_position.y + 65 };
-	}
+	cout << "A ";
+	delete _CostLabel;
+	delete _AtkpowerLabel;
+	delete _HpLabel;
 }
+

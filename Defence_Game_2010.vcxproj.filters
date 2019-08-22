@@ -42,9 +42,6 @@
     <Filter Include="ENGINE\Sprite">
       <UniqueIdentifier>{c8085fe5-b5ab-4ed7-8091-6134f4432a6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GAME\BingleBingle">
-      <UniqueIdentifier>{642e424f-e098-4bdb-9676-af6f7402361e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GAME\Card">
       <UniqueIdentifier>{c6ff7739-f2ae-4a9d-b0ef-5fce6cfb1d12}</UniqueIdentifier>
     </Filter>
@@ -65,6 +62,12 @@
     </Filter>
     <Filter Include="ENGINE\Label">
       <UniqueIdentifier>{2763f428-a8e8-4e40-9438-5653a09250c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\CardOfMaster">
+      <UniqueIdentifier>{0ddad82c-5c50-4c69-a768-011869065326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\Player">
+      <UniqueIdentifier>{3a13aae7-0fd8-40f5-a2c4-c7ff89fb03b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -152,9 +155,6 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>ENGINE\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="BingleBingle.cpp">
-      <Filter>GAME\BingleBingle</Filter>
-    </ClCompile>
     <ClCompile Include="card.cpp">
       <Filter>GAME\Card\card</Filter>
     </ClCompile>
@@ -163,6 +163,12 @@
     </ClCompile>
     <ClCompile Include="Label.cpp">
       <Filter>ENGINE\Label</Filter>
+    </ClCompile>
+    <ClCompile Include="CardMaster.cpp">
+      <Filter>GAME\CardOfMaster</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GAME\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -196,9 +202,6 @@
     <ClInclude Include="Sprite.h">
       <Filter>ENGINE\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="BingleBingle.h">
-      <Filter>GAME\BingleBingle</Filter>
-    </ClInclude>
     <ClInclude Include="card.h">
       <Filter>GAME\Card\card</Filter>
     </ClInclude>
@@ -210,6 +213,12 @@
     </ClInclude>
     <ClInclude Include="Label.h">
       <Filter>ENGINE\Label</Filter>
+    </ClInclude>
+    <ClInclude Include="CardMaster.h">
+      <Filter>GAME\CardOfMaster</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GAME\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

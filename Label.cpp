@@ -22,7 +22,7 @@ void Label::Init(wstring text, int width, int height, wstring fontpath)
 	_height = height;
 	_text = text;
 	wstring route = L"res/" + fontpath;
-	wcout << route << endl;
+	//wcout << route << endl;
 	AddFontResourceEx(route.c_str(), FR_PRIVATE, 0);
 	D3DXCreateFont(DXUTGetD3D9Device(), height, width, static_cast<int>(FW_DONTCARE), 1, false, DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS, static_cast<int>(DEFAULT_CHARSET), FF_DONTCARE, fontpath.c_str(), &_font);

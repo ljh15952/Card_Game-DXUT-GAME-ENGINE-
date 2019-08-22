@@ -378,6 +378,18 @@ enum Ability_Type
 	deathrattle,
 };
 
+enum state
+{
+	nosummon,
+	summon,
+};
+
+enum state_2
+{
+	attack,
+	noattack,
+};
+
 #endif
 
 

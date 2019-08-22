@@ -2,8 +2,9 @@
 #include "Scene.h"
 #include "Director.h"
 #include "Sprite.h"
-#include "BingleBingle.h"
 #include "cards.h"
+#include "Player.h"
+#include "CardMaster.h"
 class TestScene : public Scene
 {
 public:
@@ -11,12 +12,11 @@ public:
 	void Update() override;
 	void OnExit() override;
 
-	card * _human_1;
-	card* _human_2;
-	card * ClickObj;
+	card * _human_1[10];
 
-	list<card*> cards;
+	void GiveFirstCard();
 
-	BingleBingle * s1[30];
+	int ct;
+	float timer;
 };
 

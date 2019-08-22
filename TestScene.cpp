@@ -3,70 +3,79 @@
 
 void TestScene::OnInit()
 {
-	cout << "INIT" << endl;
+	Player::GetInstance()->Init();
 
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		s1[i] = new BingleBingle;
+		_human_1[i] = new Human_1;
+		_human_1[i] ->_position = { (float)1100 + (10*i),630 };
+		Player::GetInstance()->deck.push_back(_human_1[i]);
+
 	}
 
-	_human_1 = new Human_1;
-	_human_1->_position = { 400,400 };
-	
-	_human_2 = new Human_1;
-	_human_2->_position = { 800,400 };
 
-	cards.push_back(_human_1);
-	cards.push_back(_human_2);
+	timer = 0.3f;
+	ct = 0;
 
-
-	ClickObj = nullptr;
+	CardMaster::GetInstance()->Init();
 }
 
 
 void TestScene::Update()
 {
-	static int count= 0;
-	if (DXUTWasKeyPressed('A'))
-		Director::GetInstance()->ChangeScene(new TestScene);
-
-	
-
-	for (auto it : cards)
-	{
-		if (PtInRect(&it->GetRect(), Director::GetInstance()->p))
-			it->_scale = { 1.2f,1.2f };
-		else
-			it->_scale = { 1,1 };
-	}
-	if (DXUTIsKeyDown('Z'))
-		_human_2->_position.x += 1;
+	GiveFirstCard();
 
 	if (Director::GetInstance()->OnMouseDown())
 	{
-		//s1[count++]->SetMe(Director::GetInstance()->GetMousePos());
-		for (auto it : cards)
-			if (PtInRect(&it->GetRect(), Director::GetInstance()->p))
-				ClickObj = it;
+		Player::GetInstance()->ClickCard();
 	}
 	if (Director::GetInstance()->OnMouse())
 	{
-		if (ClickObj)
-		{
-			ClickObj->_position = Director::GetInstance()->GetMousePos();
-			ClickObj->_scale = { 1.0f,1.0f };
-		}
+		Player::GetInstance()->MoveCard();
 	}
 	if (Director::GetInstance()->OnMouseUp())
 	{
-		if (ClickObj)
-			ClickObj = nullptr;
+		Player::GetInstance()->MouseUpCard();
 	}
+
+	if (DXUTWasKeyPressed('A'))
+		Director::GetInstance()->ChangeScene(new TestScene);
 
 }
 
 void TestScene::OnExit()
 {
 	cout << "ONEXIT" << endl;
+	for (auto it : Player::GetInstance()->deck)
+	{
+		it->DeleteCard();
+	}
+	for (auto it : Player::GetInstance()->hand)
+	{
+		it->DeleteCard();
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		delete _human_1[i];
+	}
+	
+	Player::GetInstance()->DeletePlayer();
+
+	
+}
+
+void TestScene::GiveFirstCard()
+{
+	if (ct < 4)
+	{
+		timer -= Time::deltaTime;
+		if (timer < 0)
+		{
+			CardMaster::GetInstance()->GiveCard();
+			ct++;
+			timer = 0.5f;
+		}
+	}
+
 }
   
