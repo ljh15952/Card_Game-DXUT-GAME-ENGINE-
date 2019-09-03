@@ -387,6 +387,7 @@
     <ClCompile Include="card.cpp" />
     <ClCompile Include="CardMaster.cpp" />
     <ClCompile Include="Director.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="human_1.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="Node.cpp" />
@@ -401,6 +402,7 @@
     <ClInclude Include="CardMaster.h" />
     <ClInclude Include="cards.h" />
     <ClInclude Include="Director.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="human_1.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="Node.h" />

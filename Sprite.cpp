@@ -35,12 +35,24 @@ bool Sprite::Animaion(wstring path, int frame, float delay, int Aninum)
 RECT Sprite::GetRect()
 {
 	RECT r = { 0,0,0,0 };
+
 	r.left = _position.x - texture->_info.Width /2 * _scale.x;
 	r.right = _position.x + texture->_info.Width /2 * _scale.x;
 	r.top = _position.y - texture->_info.Height / 2 * _scale.y;
 	r.bottom = _position.y + texture->_info.Height / 2 * _scale.y;
 
 	return r;
+}
+
+vector2 Sprite::GoTo(vector2 endPos, float speed)
+{
+	vector2 dif = endPos - _position;
+	float l = sqrt(dif.x * dif.x + dif.y * dif.y);
+	dif.x /= l;
+	dif.y /= l;
+	//_rotation = atan2(dif.y, dif.x);
+
+	return dif * Time::deltaTime * speed;
 }
 
 void Sprite::Draw()

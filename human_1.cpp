@@ -3,21 +3,23 @@
 
 Human_1::Human_1()
 {
-	Create(L"card_example.png");
-	_hp = 1;
-	_atkpower = 1;
+	Create(L"card_back.png");
+	_hp = 2;
+	_atkpower = 3;
 	_cost = 1;
 	_country = Country::KOREA;
 	_type = Type::human;
 	_ability_type = Ability_Type::battlecry;
-	_name = "human_1";
+	_name = L"human_1";
+	isAttack = false;
+	frontcardpath = L"pigman.png";
 
 	_HpLabel = new Label;
-	_HpLabel->Init(to_wstring(_hp), 20, 25, L"ReadMDL2.ttf");
+	_HpLabel->Init(to_wstring(_hp), 15, 25, L"ReadMDL2.ttf");
 	_HpLabel->_position = { 300,200 };
 
 	_CostLabel = new Label;
-	_CostLabel->Init(to_wstring(_cost), 20, 25, L"ReadMDL2.ttf");
+	_CostLabel->Init(to_wstring(_cost), 15, 25, L"ReadMDL2.ttf");
 	_CostLabel->_position = { 300,200 };
 
 	_AtkpowerLabel = new Label;
@@ -25,9 +27,9 @@ Human_1::Human_1()
 	_AtkpowerLabel->_position = { 300,200 };
 }
 
-void Human_1::Attack()
+void Human_1::Attack(card * _card)
 {
-	cout << "human_1 ATTACK!!!!" << endl;
+	wcout << "human_1 ATTACK!!!!" << _card->GetName() << endl;
 }
 
 void Human_1::Ability()
@@ -35,7 +37,7 @@ void Human_1::Ability()
 	cout << "HE HAS NO ABILLTY" << endl;
 }
 
-void Human_1::PlayCardEvent() //if (card->_ability_type == battlecrt)
+void Human_1::CardBattleCry() //if (card->_ability_type == battlecrt)
 {
 	cout << "SAY HELLO TO YOU" << endl;
 }

@@ -380,8 +380,9 @@ enum Ability_Type
 
 enum state
 {
-	nosummon,
-	summon,
+	inhand,
+	indeck,
+	infeild
 };
 
 enum state_2
@@ -390,6 +391,18 @@ enum state_2
 	noattack,
 };
 
+enum Turn
+{
+	PlayerTurn,
+	EnemyTurn,
+};
+
+enum enemyState
+{
+	PlayCard = 0,
+	CardAttack = 1,
+	EndTurn = 2,
+};
 #endif
 
 

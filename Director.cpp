@@ -18,7 +18,7 @@ void Director::ChangeScene(Scene* scene)
 		_currentScene->OnExit();
 	_currentScene = scene;
 	_currentScene->OnInit();
-}
+} 
 
 void Director::Init()
 {

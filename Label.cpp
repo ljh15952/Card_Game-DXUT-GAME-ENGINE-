@@ -31,6 +31,9 @@ void Label::Init(wstring text, int width, int height, wstring fontpath)
 
 void Label::Draw()
 {
+	if (!_visible)
+		return;
+
 	RECT r = { 0,0,0,0 };
 	_font->DrawText(NULL, _text.c_str(), _text.size(), &r, DT_CENTER | DT_CALCRECT, 0xffffffff);
 	r.left += _position.x;

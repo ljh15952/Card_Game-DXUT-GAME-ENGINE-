@@ -5,6 +5,7 @@
 #include "cards.h"
 #include "Player.h"
 #include "CardMaster.h"
+#include "Enemy.h"
 class TestScene : public Scene
 {
 public:
@@ -13,10 +14,15 @@ public:
 	void OnExit() override;
 
 	card * _human_1[10];
+	card* _human_2[10];
+
 
 	void GiveFirstCard();
 
+
 	int ct;
 	float timer;
+	float enemytimer;
+	enemyState EnemyState;
 };
 

@@ -2,13 +2,16 @@
 #include "card.h"
 #include "cards.h"
 #include "Types.h"
-class Player : public Singleton<Player>
+#include "CardMaster.h"
+class Player
 {
 public:
-	void Init();
+
+	Player();
 
 	list<card*> deck;
-	list<card*> hand;
+	vector<card*> hand;
+	vector<card*> feild;
 
 	int Shiled_Hp;
 	int mana;
@@ -25,9 +28,17 @@ public:
 	card* ClickObj;
 	vector2 returnpos;
 
+	void ClickEndTurnButton_Up();
+	void ClickEndTurnButton_Down_ing();
+	
+	void HandReSetCardPos(int num);
+
+	Sprite* EndTurnBt;
 	Sprite* CardPlace[4];
 
 	bool playcard[4];
+
+	int currentcardnum;
 
 	void DeletePlayer();
 };

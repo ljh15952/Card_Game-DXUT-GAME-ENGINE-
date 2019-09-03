@@ -3,21 +3,28 @@
 
 void TestScene::OnInit()
 {
-	Player::GetInstance()->Init();
+	CardMaster::GetInstance()->Init();
+
 
 	for (int i = 0; i < 10; i++)
 	{
 		_human_1[i] = new Human_1;
 		_human_1[i] ->_position = { (float)1100 + (10*i),630 };
-		Player::GetInstance()->deck.push_back(_human_1[i]);
+		_human_1[i]->SetCurrentCardState(state::indeck);
+		_human_1[i]->SetVisibleLabel(false);
+		CardMaster::GetInstance()->player->deck.push_back(_human_1[i]);
 
+		_human_2[i] = new Human_1;
+		_human_2[i]->_position = { (float)1100 + (10 * i),100 };
+		_human_2[i]->SetCurrentCardState(state::indeck);
+		_human_2[i]->SetVisibleLabel(false);
+		CardMaster::GetInstance()->enemy->deck.push_back(_human_2[i]);
 	}
 
-
 	timer = 0.3f;
+	enemytimer = 0.5f;
 	ct = 0;
-
-	CardMaster::GetInstance()->Init();
+	EnemyState = enemyState::PlayCard;
 }
 
 
@@ -25,32 +32,60 @@ void TestScene::Update()
 {
 	GiveFirstCard();
 
-	if (Director::GetInstance()->OnMouseDown())
+	if (CardMaster::GetInstance()->currentTurn == Turn::PlayerTurn)
 	{
-		Player::GetInstance()->ClickCard();
+		if (Director::GetInstance()->OnMouseDown())
+		{
+			CardMaster::GetInstance()->player->ClickCard();
+		}
+		if (Director::GetInstance()->OnMouse())
+		{
+			CardMaster::GetInstance()->player->MoveCard();
+			CardMaster::GetInstance()->player->ClickEndTurnButton_Down_ing();
+		}
+		if (Director::GetInstance()->OnMouseUp())
+		{
+			CardMaster::GetInstance()->player->MouseUpCard();
+			CardMaster::GetInstance()->player->ClickEndTurnButton_Up();
+		}
 	}
-	if (Director::GetInstance()->OnMouse())
+	else if (CardMaster::GetInstance()->currentTurn == Turn::EnemyTurn)
 	{
-		Player::GetInstance()->MoveCard();
+		enemytimer -= Time::deltaTime;
+		if (enemytimer < 0)
+		{
+			if (EnemyState == enemyState::PlayCard)
+			{
+				EnemyState = CardMaster::GetInstance()->enemy->PlayCard();
+			}
+			else if(EnemyState == enemyState::CardAttack)
+			{
+				EnemyState = CardMaster::GetInstance()->enemy->AttackCard(CardMaster::GetInstance()->player);
+			}
+			else 
+			{
+				EnemyState = enemyState::PlayCard;
+				cout << "턴을 종료한다!" << endl;
+				CardMaster::GetInstance()->EndTurn();
+			}
+			enemytimer = 0.5f;
+		}
 	}
-	if (Director::GetInstance()->OnMouseUp())
-	{
-		Player::GetInstance()->MouseUpCard();
-	}
-
 	if (DXUTWasKeyPressed('A'))
 		Director::GetInstance()->ChangeScene(new TestScene);
-
 }
+//TODO : 1.적 카드 소환이되야됨 손패 포지션 조정도되야함 OK
+//		 2.공격이 되야함(체력깎이고 죽고) NO OK
+//		 3.영웅 체력이 보이고 깎여야함
+//       4.아니 카드가 움직이는 애니메이션 어케해줘야됨? 줫나어렵네
 
 void TestScene::OnExit()
 {
-	cout << "ONEXIT" << endl;
-	for (auto it : Player::GetInstance()->deck)
+	for (auto it : CardMaster::GetInstance()->player->deck)
 	{
 		it->DeleteCard();
 	}
-	for (auto it : Player::GetInstance()->hand)
+	for (auto it : CardMaster::GetInstance()->player->hand)
 	{
 		it->DeleteCard();
 	}
@@ -59,9 +94,7 @@ void TestScene::OnExit()
 		delete _human_1[i];
 	}
 	
-	Player::GetInstance()->DeletePlayer();
-
-	
+	CardMaster::GetInstance()->player->DeletePlayer();
 }
 
 void TestScene::GiveFirstCard()
@@ -71,7 +104,8 @@ void TestScene::GiveFirstCard()
 		timer -= Time::deltaTime;
 		if (timer < 0)
 		{
-			CardMaster::GetInstance()->GiveCard();
+			CardMaster::GetInstance()->GivePlayerCard();
+			CardMaster::GetInstance()->GiveEnemyCard();
 			ct++;
 			timer = 0.5f;
 		}

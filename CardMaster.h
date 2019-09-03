@@ -1,19 +1,29 @@
 #pragma once
-#include "Player.h"
 #include "Types.h"
-#include "card.h"
+#include "Enemy.h"
+#include "Player.h"
+class Enemy;
+class Player;
 class CardMaster : public Singleton<CardMaster> 
 {
 public:
 	void SurffleCard();
-	void GiveCard();
+	void GivePlayerCard();
+	void GiveEnemyCard();
+
 	void EndTurn();
 	void GiveFirstCard();
 	void PlayCard();
 
+	Turn currentTurn;
+
+	Enemy* enemy;
+	Player* player;
+
+
 	void Init();
-	int a;
-
-
+	int DrawCardPos_Player;
+	int DrawCardPos_Enemy;
+	int TurnCount;
 };
 
