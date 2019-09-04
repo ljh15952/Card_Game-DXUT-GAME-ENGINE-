@@ -15,6 +15,8 @@ Enemy::Enemy()
 		CardPlace[i]->Create(L"card_place.png");
 		CardPlace[i]->_position = { (float)340 + (200 * i),250 };
 	}
+
+	CAttack = false;
 }
 
 enemyState Enemy::PlayCard()
@@ -63,6 +65,34 @@ void Enemy::RealPlayCard(card * it)
 	}
 }
 
+void Enemy::MoveCard()
+{
+	static bool b = true;
+	if (b)
+	{
+		if (AtkCard->GoTo(endPos, 1500))
+		{
+			b = !b;
+		}
+	}
+	else
+	{
+		if (AtkCard->GoTo(startPos, 1500))
+		{
+			b = !b;
+			CAttack = false;
+		}
+	}
+}
+
+void Enemy::SetAtkPos(card* card, vector2 _startPos, vector2 _endPos)
+{
+	AtkCard = card;
+	startPos = _startPos;
+	endPos = _endPos;
+	CAttack = true;
+}
+
 enemyState Enemy::AttackCard(Player* player)
 {
 	if (feild.size() == 0)
@@ -77,6 +107,7 @@ enemyState Enemy::AttackCard(Player* player)
 			if (it->isAttack)
 			{
 				it->Attack(player->feild[0]);
+				SetAtkPos(it, it->_position, player->feild[0]->_position);
 				wcout << it->GetName() << "이 " << player->feild[0]->GetName() << "을 공격함!!" << endl;
 				it->isAttack = false;
 				return enemyState::CardAttack;
@@ -90,6 +121,7 @@ enemyState Enemy::AttackCard(Player* player)
 			if (it->isAttack)
 			{
 				cout << "명치떄려 슈발" << endl;
+				SetAtkPos(it, it->_position, { 500,500 });
 				it->isAttack = false;
 				if(feild.back() == it)
 					return enemyState::EndTurn;

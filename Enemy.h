@@ -24,5 +24,12 @@ public:
 
 	void RealPlayCard(card* it);
 	Sprite* CardPlace[4];
+
+	void MoveCard();
+	void SetAtkPos(card* card, vector2 startPos, vector2 endPos);
+	card* AtkCard;
+	vector2 startPos;
+	vector2 endPos;
+	bool CAttack;
 };
 

@@ -44,15 +44,19 @@ RECT Sprite::GetRect()
 	return r;
 }
 
-vector2 Sprite::GoTo(vector2 endPos, float speed)
+bool Sprite::GoTo(vector2 endPos, float speed)
 {
 	vector2 dif = endPos - _position;
 	float l = sqrt(dif.x * dif.x + dif.y * dif.y);
 	dif.x /= l;
 	dif.y /= l;
-	//_rotation = atan2(dif.y, dif.x);
+//	_rotation = atan2(dif.y, dif.x);
 
-	return dif * Time::deltaTime * speed;
+	if (l < 10)
+		return true;
+
+	_position += dif * Time::deltaTime * speed;
+	return false;
 }
 
 void Sprite::Draw()

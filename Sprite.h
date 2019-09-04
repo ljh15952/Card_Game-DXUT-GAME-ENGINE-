@@ -20,7 +20,7 @@ public:
 
 	RECT GetRect();
 	
-	vector2 GoTo( vector2 endPos, float speed);
+	bool GoTo( vector2 endPos, float speed);
 
 	Texture2D* texture;
 
